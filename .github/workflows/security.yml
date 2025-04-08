@@ -1,37 +1,39 @@
-name: Seguridad
+name: Security
 
+# Trigger the workflow on push or pull request events to the main branch
 on:
   push:
     branches:
-      - main # Ejecutar el workflow en cada push a la rama main
+      - main
   pull_request:
     branches:
-      - main # Ejecutar el workflow en cada pull request hacia la rama main
+      - main
 
+# Minimum permissions required for this workflow
 permissions:
-  contents: read # Configuración mínima de permisos necesarios para este workflow
+  contents: read
 
 jobs:
-  seguridad:
-    runs-on: ubuntu-latest # El job se ejecutará en un entorno Ubuntu actualizado
+  security:
+    runs-on: ubuntu-latest # The job will run on an updated Ubuntu environment
 
     steps:
-      - name: Clonar el repositorio
-        uses: actions/checkout@v4 # Acción para clonar el repositorio en el entorno de ejecución
+      - name: Clone the repository
+        uses: actions/checkout@v4 # Action to clone the repository in the execution environment
 
-      - name: Configurar Node.js
-        uses: actions/setup-node@v4 # Acción para configurar la versión de Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4 # Action to set up the Node.js version
         with:
-          node-version: '20' # Especifica la versión de Node.js a usar
+          node-version: '20' # Specifies the Node.js version to use
 
-      - name: Instalar dependencias con npm
-        run: npm ci # Instala las dependencias del proyecto de forma limpia
+      - name: Install dependencies with npm
+        run: npm ci # Cleanly install the project dependencies
 
-      - name: Auditoría de seguridad en dependencias
-        run: npm audit --audit-level=high # Ejecuta una auditoría de seguridad para detectar vulnerabilidades críticas
+      - name: Security audit on dependencies
+        run: npm audit --audit-level=high # Run a security audit to detect critical vulnerabilities
 
-      - name: Ejecutar pruebas unitarias
-        run: npm test -- --watch=false --browsers=ChromeHeadless # Ejecuta las pruebas unitarias en un navegador sin interfaz gráfica
+      - name: Run unit tests
+        run: npm test -- --watch=false --browsers=ChromeHeadless # Run unit tests in a headless browser
 
-      - name: Compilar aplicación en modo producción
-        run: npm run build -- --configuration=production # Compila la aplicación en modo producción
+      - name: Build the application in production mode
+        run: npm run build -- --configuration=production # Build the application in production mode
