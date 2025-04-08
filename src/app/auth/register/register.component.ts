@@ -57,6 +57,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    // implementación real o vacío
   }
+
 }
