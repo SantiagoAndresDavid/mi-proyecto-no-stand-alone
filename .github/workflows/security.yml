@@ -1,0 +1,37 @@
+name: Seguridad
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read  # Acceso mínimo necesario
+
+jobs:
+  seguridad:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependencias con npm
+        run: npm ci
+
+      - name: Auditoría de seguridad en dependencias
+        run: npm audit --audit-level=high
+
+      - name: Ejecutar pruebas unitarias
+        run: npm test -- --watch=false --browsers=ChromeHeadless
+
+      - name: Compilar aplicación en modo producción
+        run: npm run build -- --configuration=production
