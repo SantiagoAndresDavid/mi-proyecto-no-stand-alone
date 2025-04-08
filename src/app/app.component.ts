@@ -8,7 +8,7 @@ import {Router, RouterOutlet} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-app';
+  title = 'mi-proyecto-no-stand-alone';
 
   constructor(private router: Router) {
     console.log('🔍 Rutas registradas:', this.router.config);
