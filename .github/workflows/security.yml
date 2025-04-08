@@ -3,35 +3,35 @@ name: Seguridad
 on:
   push:
     branches:
-      - main
+      - main # Ejecutar el workflow en cada push a la rama main
   pull_request:
     branches:
-      - main
+      - main # Ejecutar el workflow en cada pull request hacia la rama main
 
 permissions:
-  contents: read  # Acceso mínimo necesario
+  contents: read # Configuración mínima de permisos necesarios para este workflow
 
 jobs:
   seguridad:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # El job se ejecutará en un entorno Ubuntu actualizado
 
     steps:
       - name: Clonar el repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # Acción para clonar el repositorio en el entorno de ejecución
 
       - name: Configurar Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4 # Acción para configurar la versión de Node.js
         with:
-          node-version: '20'
+          node-version: '20' # Especifica la versión de Node.js a usar
 
       - name: Instalar dependencias con npm
-        run: npm ci
+        run: npm ci # Instala las dependencias del proyecto de forma limpia
 
       - name: Auditoría de seguridad en dependencias
-        run: npm audit --audit-level=high
+        run: npm audit --audit-level=high # Ejecuta una auditoría de seguridad para detectar vulnerabilidades críticas
 
       - name: Ejecutar pruebas unitarias
-        run: npm test -- --watch=false --browsers=ChromeHeadless
+        run: npm test -- --watch=false --browsers=ChromeHeadless # Ejecuta las pruebas unitarias en un navegador sin interfaz gráfica
 
       - name: Compilar aplicación en modo producción
-        run: npm run build -- --configuration=production
+        run: npm run build -- --configuration=production # Compila la aplicación en modo producción
