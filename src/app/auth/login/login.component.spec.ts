@@ -23,4 +23,11 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should create a form with two controls', () => {
+    expect(component.loginForm.contains('email')).toBeTruthy();
+    expect(component.loginForm.contains('password')).toBeTruthy();
+  });
+
+
 });

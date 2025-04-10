@@ -23,4 +23,12 @@ describe('RegisterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should create a form with three controls', () => {
+    expect(component.registerForm.contains('name')).toBeTruthy();
+    expect(component.registerForm.contains('email')).toBeTruthy();
+    expect(component.registerForm.contains('password')).toBeTruthy();
+    expect(component.registerForm.contains('idRole')).toBeTruthy();
+    expect(component.registerForm.contains('roleName')).toBeTruthy();
+  });
 });
